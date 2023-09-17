@@ -50,6 +50,11 @@ class Login1Activity : AppCompatActivity() {
         binding.btnStartGoogle.setOnClickListener{
             addListener()
         }
+
+        binding.btnStartNaver.setOnClickListener {
+            val intent= Intent( this,NaverLoginActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun addListener() {

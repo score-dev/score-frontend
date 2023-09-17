@@ -47,6 +47,10 @@
             android:name=".MainActivity"
             android:exported="false">
         </activity>
+        <activity
+            android:name=".NaverLoginActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

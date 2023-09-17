@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">score_frontend</string>
+    <string name="social_login_info_naver_client_id">g5wBSflvhBgCmuxIpgkF</string>
+    <string name="social_login_info_naver_client_secret">g1VyPJPZjA</string>
+    <string name="social_login_info_naver_client_name">네이버아이디 로그인</string>
 </resources>
