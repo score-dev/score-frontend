@@ -70,6 +70,7 @@ class KakaoLoginActivity : AppCompatActivity() {
         UserApiClient.instance.me { user, error ->
             Log.e(TAG, "닉네임 ${user?.kakaoAccount?.profile?.nickname}")
             Log.e(TAG, "이메일 ${user?.kakaoAccount?.email}")
+            Log.e(TAG, "아이디 ${user?.id}")
             Toast.makeText(
                 this,
                 "${user?.kakaoAccount?.profile?.nickname}님 환영합니다.",

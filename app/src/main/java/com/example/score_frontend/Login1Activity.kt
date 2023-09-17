@@ -24,10 +24,11 @@ class Login1Activity : AppCompatActivity() {
             // 이름, 이메일 등이 필요하다면 아래와 같이 account를 통해 각 메소드를 불러올 수 있다.
             val userName = account.givenName
             val serverAuth = account.serverAuthCode
+            val id = account.id
             val email = account.email
             val accessToken = account.idToken
             Log.d("username", userName.toString())
-            Log.d("email", email.toString())
+            Log.d("id", id.toString())
             Log.d("accessToken", accessToken.toString())
 
             moveSignUpActivity()

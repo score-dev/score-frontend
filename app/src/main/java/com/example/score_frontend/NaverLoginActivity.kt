@@ -10,10 +10,14 @@ import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /** MainActivity.kt */
 class NaverLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLogin1Binding
+    private lateinit var id: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +50,12 @@ class NaverLoginActivity : AppCompatActivity() {
         val profileCallback = object : NidProfileCallback<NidProfileResponse> {
             override fun onSuccess(response: NidProfileResponse) {
                 val userId = response.profile?.id
+                id = userId.toString()
                 Log.d("id", userId.toString())
                 Log.d("token", naverToken.toString())
            //     setLayoutState(true)
                 Toast.makeText(this@NaverLoginActivity, "네이버 아이디 로그인 성공!", Toast.LENGTH_SHORT).show()
+                getNaverFun()
             }
             override fun onFailure(httpStatus: Int, message: String) {
                 val errorCode = NaverIdLoginSDK.getLastErrorCode().code
@@ -136,4 +142,27 @@ class NaverLoginActivity : AppCompatActivity() {
 //            binding.tvResult.text = ""
 //        }
 //    }
+
+    private fun getNaverFun() {
+
+        LoginService.retrofitPostLogin(id)
+            .enqueue(object : Callback<String> { // 응답 타입을 String으로 지정
+                override fun onResponse(
+                    call: Call<String>,
+                    response: Response<String>
+                ) {
+                    if (response.isSuccessful) {
+                        val responseData = response.body()
+                        println("네이버 로그인 성공: $responseData")
+                    } else {
+                        val errorBody = response.errorBody()?.string()
+                        println("네이버 로그인 실패: $errorBody")
+                    }
+                }
+
+                override fun onFailure(call: Call<String>, t: Throwable) {
+                    Log.e("TAG", "실패원인: $t")
+                }
+            })
+    }
 }
